@@ -27,6 +27,7 @@ const About = () => {
             className="w-[400px] h-[400px] object-cover"
           />
         </div>
+        {/* IMAGE CONTAINER UP */}
       </div>
     </div>
   );

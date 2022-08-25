@@ -1,26 +1,26 @@
-const { faker } = require('@faker-js/faker');
-const _ = require('lodash');
+const { faker } = require("@faker-js/faker");
+const _ = require("lodash");
 
-const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require("mongodb").MongoClient;
 
 async function main() {
   const url =
-    'mongodb+srv://Seba:Jesusismyhome77@cluster0.ql4fy.mongodb.net/food-ordering?retryWrites=true&w=majority';
+    "mongodb+srv://Seba:Jesusismyhome77@cluster0.ql4fy.mongodb.net/food-ordering?retryWrites=true&w=majority";
 
   const client = new MongoClient(url);
 
   try {
     await client.connect();
-    console.log('Connected correctly to server');
+    console.log("Connected correctly to server");
 
     const productsCollection = client
-      .db('food-ordering')
-      .collection('products');
+      .db("food-ordering")
+      .collection("products");
     const categoriesCollection = client
-      .db('food-ordering')
-      .collection('categories');
+      .db("food-ordering")
+      .collection("categories");
 
-    let categories = ['breakfast', 'lunch', 'dinner', 'drinks'].map(
+    let categories = ["breakfast", "lunch", "dinner", "drinks"].map(
       (category) => {
         return { name: category };
       }
@@ -29,9 +29,9 @@ async function main() {
     await categoriesCollection.insertMany(categories);
 
     let imageUrls = [
-      'https://res.cloudinary.com/dlv0lekro/image/upload/v1657056151/food-ordering-app/1_mfgcb5.png',
-      'https://res.cloudinary.com/dlv0lekro/image/upload/v1657056151/food-ordering-app/2_afbbos.png',
-      'https://res.cloudinary.com/dlv0lekro/image/upload/v1657056151/food-ordering-app/3_iawvqb.png',
+      "https://res.cloudinary.com/dlv0lekro/image/upload/v1657056151/food-ordering-app/1_mfgcb5.png",
+      "https://res.cloudinary.com/dlv0lekro/image/upload/v1657056151/food-ordering-app/2_afbbos.png",
+      "https://res.cloudinary.com/dlv0lekro/image/upload/v1657056151/food-ordering-app/3_iawvqb.png",
     ];
 
     let products = [];

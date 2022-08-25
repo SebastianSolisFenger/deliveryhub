@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 const ProductsPreview = () => {
   const [products, setProducts] = useState([]);
 
+  // USEEFFECT FOR FETCHING DATA WHEN COMPONENT IS MOUNTED
   useEffect(() => {
     fetch("http://localhost:8080/api/products")
       .then((res) => res.json())

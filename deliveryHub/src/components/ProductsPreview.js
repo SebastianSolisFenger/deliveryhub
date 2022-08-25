@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ProductPreviewCard from "./ProductPreviewCard";
 
 // FETCH DATA FROM API
 const ProductsPreview = () => {
@@ -17,7 +18,7 @@ const ProductsPreview = () => {
       <h2>Products</h2>
       {products.length > 0 &&
         products.map((product, index) => {
-          return <div key={index}>{product.name}</div>;
+          return <ProductPreviewCard key={index} product={product} />;
         })}
     </div>
   );

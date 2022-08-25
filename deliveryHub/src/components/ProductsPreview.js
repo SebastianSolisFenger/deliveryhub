@@ -18,7 +18,11 @@ const ProductsPreview = () => {
       <h2>Products</h2>
       {products.length > 0 &&
         products.map((product, index) => {
-          return <ProductPreviewCard key={index} product={product} />;
+          return (
+            <div className="w-full p-3">
+              <ProductPreviewCard key={index} product={product} />;
+            </div>
+          );
         })}
     </div>
   );

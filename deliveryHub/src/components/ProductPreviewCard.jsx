@@ -4,6 +4,8 @@ import AddProduct from "./AddProduct";
 const ProductPreviewCard = ({ product, onAddProduct }) => {
   const addProduct = () => {
     // TODO: CREATE AFTER SETTING UP REDUX STATE FOR CART TO ADD PRODUCT THERE
+    // DONE
+    onAddProduct(product);
   };
 
   return (

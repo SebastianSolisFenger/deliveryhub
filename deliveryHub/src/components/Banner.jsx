@@ -33,8 +33,8 @@
 // };
 
 // export default Banner;
-import React from 'react';
-import Button from './elements/Button';
+import React from "react";
+import Button from "./elements/Button";
 
 export const Banner = () => {
   return (
@@ -58,7 +58,7 @@ export const Banner = () => {
       </div>
       <div className="banner-image w-full md:w-1/2 p-3 flex justify-end">
         <img
-          src={require('../assets/images/pizza_banner.png')}
+          src={require("../assets/images/pizza_banner.png")}
           alt="banner"
           className="max-h-95"
         />

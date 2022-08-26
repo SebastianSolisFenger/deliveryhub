@@ -48,7 +48,11 @@ const ProductsPreview = () => {
           products.map((product, index) => {
             return (
               <div className="w-full p-3">
-                <ProductPreviewCard key={index} product={product} />
+                <ProductPreviewCard
+                  key={index}
+                  product={product}
+                  onAddProduct={onAddProduct}
+                />
               </div>
             );
           })}

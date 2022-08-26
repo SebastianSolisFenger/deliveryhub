@@ -6,7 +6,9 @@ const AddProduct = ({ onAddProduct }) => {
       <button
         onClick={onAddProduct}
         className="bg-yellow-400 hover:bg-yellow-500 rounded-full w-5 h-5 flex items-center justify-center text-lg"
-      ></button>
+      >
+        <span className="flex items-center justify-center">+</span>
+      </button>
     </div>
   );
 };

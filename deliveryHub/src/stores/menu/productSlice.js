@@ -11,9 +11,18 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      state.status = "fulfilled";
+      state.products.push(action.payload.data);
+    });
+    builder.addCase(fetchProducts.pending, (state, action) => {
+      state.status = "pending";
+    });
+  },
 });
 
-// return what's currrently stored in our redux state of products
+// return whats currrently stored in our redux state of products
 export const { getProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

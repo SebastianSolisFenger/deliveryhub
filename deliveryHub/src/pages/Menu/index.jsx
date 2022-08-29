@@ -5,6 +5,7 @@ import {
   selectAllProducts,
 } from "../../stores/menu/productSlice";
 import { useEffect } from "react";
+import ProductDetailCard from '../../components/ProductDetailCard'
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Menu = () => {
   console.log(products.products[0].products);
 
   return (
-    <div>
+    <div className="bg-white">
       <h1 className="text-white">whatt</h1>
       <div className="menu-wrapper">
         {/* {products.products.map((product, index) => {
@@ -31,7 +32,7 @@ const Menu = () => {
           );
         })} */}
         {products.products[0].products.map((product, index) => {
-          return <h1 className="text-white">{product.name}</h1>;
+          return  <ProductDetailCard key={index}  product={product}/>
         })}
       </div>
     </div>

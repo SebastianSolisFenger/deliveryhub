@@ -14,7 +14,7 @@ export const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.status = "fulfilled";
-      state.products.push(action.payload.data);
+      state.products = [...action.payload.data];
     });
     builder.addCase(fetchProducts.pending, (state, action) => {
       state.status = "pending";
@@ -22,7 +22,6 @@ export const productsSlice = createSlice({
   },
 });
 
-// return whats currrently stored in our redux state of products
 export const { getProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;
@@ -30,8 +29,10 @@ export default productsSlice.reducer;
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const res = await fetch("http://localhost:8080/api/products-by-categories");
-    const data = await res.json();
+    const response = await fetch(
+      "http://localhost:8080/api/products-by-categories"
+    );
+    const data = await response.json();
     return data;
   }
 );

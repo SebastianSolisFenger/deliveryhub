@@ -15,22 +15,21 @@ const Menu = () => {
     dispatch(fetchProducts());
   }, []);
 
-  console.log(products);
-  console.log(products.status);
-
   return (
-    <div>
-      {products.status === "fulfilled" &&
-        products.products.map((product, index) => {
+    <>
+      <h1 className="text-white">whatt</h1>
+      <div>
+        {products.products.map((product, index) => {
+          console.log(product);
           return (
-            <div key={index}>
-              <h1>{product.name}</h1>
-              <p>{product.description}</p>
-              <p>{product.price}</p>
-            </div>
+            <>
+              <div className="text-white">{product.name.name}</div>
+              <div className="text-white">{product.products[0].name}</div>
+            </>
           );
         })}
-    </div>
+      </div>
+    </>
   );
 };
 

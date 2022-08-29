@@ -15,11 +15,13 @@ const Menu = () => {
     dispatch(fetchProducts());
   }, []);
 
+  console.log(products.products[0].products);
+
   return (
-    <>
+    <div>
       <h1 className="text-white">whatt</h1>
-      <div>
-        {products.products.map((product, index) => {
+      <div className="menu-wrapper">
+        {/* {products.products.map((product, index) => {
           console.log(product);
           return (
             <>
@@ -27,9 +29,12 @@ const Menu = () => {
               <div className="text-white">{product.products[0].name}</div>
             </>
           );
+        })} */}
+        {products.products[0].products.map((product, index) => {
+          return <h1 className="text-white">{product.name}</h1>;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

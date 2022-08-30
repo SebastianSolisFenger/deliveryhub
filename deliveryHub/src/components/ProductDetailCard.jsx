@@ -1,6 +1,7 @@
 import React from "react";
+import Button from "./elements/Button";
 
-const productDetailCard = ({ product }) => {
+const productDetailCard = ({ product, onAddProduct }) => {
   return (
     <div className="p-4 m-4 rounded-lg bg-slate-50">
       <div className="flex flex-col items-center justify-between">
@@ -16,6 +17,9 @@ const productDetailCard = ({ product }) => {
           className="w-40 h-40 rounded-xl object-cover"
           alt={product.name}
         />
+      </div>
+      <div className="w-full flex justify-center items-center">
+        <Button onClick={onAddProduct}>Add to Cart</Button>
       </div>
     </div>
   );

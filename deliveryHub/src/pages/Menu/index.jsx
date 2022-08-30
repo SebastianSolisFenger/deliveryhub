@@ -4,24 +4,34 @@ import {
   fetchProducts,
   selectAllProducts,
 } from "../../stores/menu/productSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductDetailCard from "../../components/ProductDetailCard";
+import { Tabs } from "../../components/Tabs.jsx";
 
 const Menu = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
+  const [activeTab, setActiveTab] = useState("");
 
   // when component mounts, fetch products
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  console.log(products.products[0].products);
+  // console.log(products.products[0].products);
 
   return (
     <div className="bg-white">
-      <h1 className="text-white">whatt</h1>
       <div className="menu-wrapper">
+        {products.products && (
+          <Tabs
+            list={products.products.map((product) => {
+              return product.name.name;
+            })}
+            activeTab={activeTab}
+            onTabSwitch={setActiveTab}
+          />
+        )}
         {products.products[0].products.map((product, index) => {
           return <ProductDetailCard key={index} product={product} />;
         })}

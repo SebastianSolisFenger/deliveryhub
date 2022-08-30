@@ -7,7 +7,7 @@ export const TabItem = ({ title, index, active, setActive }) => {
 
   return (
     <div className="nav-item px-2">
-      <a href={`{#{title}}`}>
+      {/* <a href={`{#{title}}`}> */}
         <button onClick={() => setActive(title)} className="pt-7 pb-3">
           <span
             className={`hover:text-yellow transition-colors border-b-2 ${className}`}
@@ -15,7 +15,7 @@ export const TabItem = ({ title, index, active, setActive }) => {
             {title.toUpperCase()}
           </span>
         </button>
-      </a>
+      {/* </a> */}
     </div>
   );
 };

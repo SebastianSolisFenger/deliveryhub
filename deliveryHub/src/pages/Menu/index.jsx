@@ -22,20 +22,24 @@ const Menu = () => {
 
   return (
     <div className="bg-white">
-      <div className="menu-wrapper">
-        {products.products && (
-          <Tabs
-            list={products.products.map((product) => {
-              return product.name.name;
-            })}
-            activeTab={activeTab}
-            onTabSwitch={setActiveTab}
-          />
-        )}
-        {products.products[0].products.map((product, index) => {
-          return <ProductDetailCard key={index} product={product} />;
-        })}
-      </div>
+      {products.status === "pending" ? (
+        <div> Loading... </div>
+      ) : (
+        <div className="menu-wrapper">
+          {products.products && (
+            <Tabs
+              list={products.products.map((product) => {
+                return product.name.name;
+              })}
+              activeTab={activeTab}
+              onTabSwitch={setActiveTab}
+            />
+          )}
+          {products.products[0].products.map((product, index) => {
+            return <ProductDetailCard key={index} product={product} />;
+          })}
+        </div>
+      )}
     </div>
   );
 };

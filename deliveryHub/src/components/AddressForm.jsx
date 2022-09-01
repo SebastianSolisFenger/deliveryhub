@@ -1,14 +1,19 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './elements/Button';
+import { useDispatch } from 'react-redux';
+import { setAddress } from '../stores/userInfo/addressSlice';
 import { ReactComponent as ArrowRightSvg } from '../assets/icons/arrow-right-long-svgrepo-com.svg';
 
-const AddressForm = () => {
+const AddressForm = ({ onTabSwitch }) => {
   // register would save the values that the user inputs in the form
   const { register, handleSubmit } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(setAddress(data));
+    onTabSwitch('Payment');
   };
 
   return (

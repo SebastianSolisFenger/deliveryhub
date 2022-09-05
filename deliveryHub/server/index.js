@@ -10,6 +10,9 @@ const db = require('./db');
 const app = express();
 const ProductRouter = require('./routes/productRouter.jsx');
 
+// ORDER SCHEMA
+const Order = require('./models/orderModel');
+
 // access to the secret env KEYS
 const env = require('dotenv').config({ path: '../.env' });
 
@@ -105,12 +108,27 @@ app.use('/api/', ProductRouter);
 
 app.post('/create-payment-intent', async (req, res) => {
   try {
-    // const { orderItems, shippingAddress, userId } = req.body;
+    const { orderItems, shippingAddress, userId } = req.body;
 
-    // const totalPrice = calculateOrderAmount(orderItems);
+    const totalPrice = calculateOrderAmount(orderItems);
 
-    // TEMP
-    const totalPrice = 100;
+    // // TEMP
+    // const totalPrice = 100;
+
+    const taxPrice = 0;
+    const shippingPrice = 0;
+
+    const order = new Order({
+      orderItems,
+      shippingAddress,
+      paymentMethod: 'stripe',
+      totalPrice,
+      taxPrice,
+      shippingPrice,
+      user: '',
+    });
+
+    await order.save();
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalPrice,

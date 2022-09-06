@@ -104,6 +104,8 @@ app.listen(PORT, () => {
 
 app.use('/api/', ProductRouter);
 
+//
+
 // Create a PaymentIntent with the order amount and currency
 
 app.post('/create-payment-intent', async (req, res) => {

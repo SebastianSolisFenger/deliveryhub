@@ -25,11 +25,11 @@ var corsOptions = {
 
 const calculateOrderAmount = (orderItems) => {
   const initialValue = 0;
-  const itemsPrice = orderItems.reduce((previousValue, currentValue) => {
-    return (
-      previousValue + currentValue.price * currentValue.amount, initialValue
-    );
-  });
+  const itemsPrice = orderItems.reduce(
+    (previousValue, currentValue) =>
+      previousValue + currentValue.price * currentValue.amount,
+    initialValue
+  );
   return itemsPrice * 100;
 };
 
@@ -130,7 +130,7 @@ app.post('/create-payment-intent', async (req, res) => {
       user: '',
     });
 
-    await order.save();
+    // await order.save();
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalPrice,
@@ -148,6 +148,5 @@ app.post('/create-payment-intent', async (req, res) => {
         message: err.message,
       },
     });
-    console.log(err);
   }
 });

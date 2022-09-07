@@ -17,6 +17,26 @@ const Register = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
 
+  const onSubmit = (data) => {
+    setLoading(true);
+    const authentication = getAuth();
+    let uid = '';
+    createUserWithEmailAndPassword(
+      authentication,
+      data.email,
+      data.password
+    ).then((response) => {
+      uid = response.user.uid;
+      // store the uid in session?
+      sessionStorage.setItem('User Id', uid);
+      sessionStorage.setItem(
+        'Auth token',
+        response._tokenResponse.refreshToken
+      );
+      window.dispatchEvent(new Event('storage'));
+    });
+  };
+
   return (
     <div className="h-screen bg-black flex items-center justify-center">
       <div className="rounded-lg max-w-md w-full flex flec-col items-center justify-center relative">
@@ -71,7 +91,9 @@ const Register = () => {
                 className="block appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:ring-gray-200 focus:border-gray-200"
               />
             </div>
+            <Button size="large">{loading ? 'Loading...' : 'Register'}</Button>
           </form>
+          <ToastContainer />
         </div>
       </div>
     </div>

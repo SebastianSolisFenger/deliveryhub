@@ -1,14 +1,15 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "../components/Header";
-import Home from "../pages/Home";
-import Cart from "../pages/Cart";
-import Login from "../pages/Login";
-import Menu from "../pages/Menu";
-import PaymentSuccess from "../pages/PaymentSuccess";
-import Register from "../pages/Register";
-import { useSelector } from "react-redux";
-import { cartProducts } from "../stores/cart/cartSlice";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from '../components/Header';
+import Home from '../pages/Home';
+import Cart from '../pages/Cart';
+import Login from '../pages/Login';
+import Menu from '../pages/Menu';
+import PaymentSuccess from '../pages/PaymentSuccess';
+import Register from '../pages/Register';
+import { useSelector } from 'react-redux';
+import { cartProducts } from '../stores/cart/cartSlice';
+import Footer from '../components/Footer';
 
 const Navigation = () => {
   const productsInCart = useSelector(cartProducts);
@@ -23,6 +24,7 @@ const Navigation = () => {
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

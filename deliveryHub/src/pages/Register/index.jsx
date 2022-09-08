@@ -21,20 +21,22 @@ const Register = () => {
     setLoading(true);
     const authentication = getAuth();
     let uid = '';
-    createUserWithEmailAndPassword(
-      authentication,
-      data.email,
-      data.password
-    ).then((response) => {
-      uid = response.user.uid;
-      // store the uid in session?
-      sessionStorage.setItem('User Id', uid);
-      sessionStorage.setItem(
-        'Auth token',
-        response._tokenResponse.refreshToken
-      );
-      window.dispatchEvent(new Event('storage'));
-    });
+    createUserWithEmailAndPassword(authentication, data.email, data.password)
+      .then((response) => {
+        uid = response.user.uid;
+        // store the uid in session?
+        sessionStorage.setItem('User Id', uid);
+        sessionStorage.setItem(
+          'Auth token',
+          response._tokenResponse.refreshToken
+        );
+        window.dispatchEvent(new Event('storage'));
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          toast.error('Email already in use');
+        }
+      });
   };
 
   return (

@@ -80,7 +80,7 @@ const Register = () => {
         <div className="absolute inset-0 transition duration-300 animate-pink blur gradient bg-gradient-to-tr from-rose-500 to-yellow-500"></div>
         <div className="p-10 rounded-xl z-10 w-full h-full bg-black">
           <h5 className="text-3xl">Register</h5>
-          <form className="w-full space-y-6">
+          <form className="w-full space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label
                 htmlFor="name"
@@ -88,7 +88,7 @@ const Register = () => {
               >
                 Name
               </label>
-              <i
+              <input
                 {...register('name', { required: true })}
                 id="name"
                 name="name"
@@ -104,7 +104,7 @@ const Register = () => {
               >
                 Email
               </label>
-              <i
+              <input
                 {...register('email', { required: true })}
                 id="email"
                 name="email"
@@ -120,7 +120,7 @@ const Register = () => {
               >
                 Password
               </label>
-              <i
+              <input
                 {...register('password', { required: true })}
                 id="password"
                 name="password"

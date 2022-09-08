@@ -37,6 +37,41 @@ const Register = () => {
           toast.error('Email already in use');
         }
       });
+
+    // FETCH USER
+    fetch('http://localhost:8080/api/create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        _id: uid,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          toast.success('User created successfully', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+          navigate('/');
+        } else {
+          console.log(response.json());
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
   };
 
   return (

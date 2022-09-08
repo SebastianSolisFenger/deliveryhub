@@ -9,6 +9,7 @@ const db = require('./db');
 
 const app = express();
 const ProductRouter = require('./routes/productRouter.jsx');
+const UserRouter = require('./routes/userRouter.js');
 
 // ORDER SCHEMA
 const Order = require('./models/orderModel');
@@ -102,8 +103,11 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+//
+//
 app.use('/api/', ProductRouter);
-
+app.use('/api/', UserRouter);
+//
 //
 
 // Create a PaymentIntent with the order amount and currency

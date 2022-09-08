@@ -21,20 +21,57 @@ const Register = () => {
     setLoading(true);
     const authentication = getAuth();
     let uid = '';
-    createUserWithEmailAndPassword(
-      authentication,
-      data.email,
-      data.password
-    ).then((response) => {
-      uid = response.user.uid;
-      // store the uid in session?
-      sessionStorage.setItem('User Id', uid);
-      sessionStorage.setItem(
-        'Auth token',
-        response._tokenResponse.refreshToken
-      );
-      window.dispatchEvent(new Event('storage'));
-    });
+    createUserWithEmailAndPassword(authentication, data.email, data.password)
+      .then((response) => {
+        uid = response.user.uid;
+        // store the uid in session?
+        sessionStorage.setItem('User Id', uid);
+        sessionStorage.setItem(
+          'Auth token',
+          response._tokenResponse.refreshToken
+        );
+        window.dispatchEvent(new Event('storage'));
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          toast.error('Email already in use');
+        }
+      });
+
+    // FETCH USER
+    fetch('http://localhost:8080/api/create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        _id: uid,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          toast.success('User created successfully', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+          navigate('/');
+        } else {
+          console.log(response.json());
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
   };
 
   return (
@@ -43,7 +80,7 @@ const Register = () => {
         <div className="absolute inset-0 transition duration-300 animate-pink blur gradient bg-gradient-to-tr from-rose-500 to-yellow-500"></div>
         <div className="p-10 rounded-xl z-10 w-full h-full bg-black">
           <h5 className="text-3xl">Register</h5>
-          <form className="w-full space-y-6">
+          <form className="w-full space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label
                 htmlFor="name"
@@ -51,7 +88,7 @@ const Register = () => {
               >
                 Name
               </label>
-              <i
+              <input
                 {...register('name', { required: true })}
                 id="name"
                 name="name"
@@ -67,7 +104,7 @@ const Register = () => {
               >
                 Email
               </label>
-              <i
+              <input
                 {...register('email', { required: true })}
                 id="email"
                 name="email"
@@ -83,7 +120,7 @@ const Register = () => {
               >
                 Password
               </label>
-              <i
+              <input
                 {...register('password', { required: true })}
                 id="password"
                 name="password"

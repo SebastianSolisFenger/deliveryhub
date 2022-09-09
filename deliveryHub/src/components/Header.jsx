@@ -1,9 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import cartIcon from "../assets/icons/cart.svg";
-import foody from "../assets/images/foody.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import cartIcon from '../assets/icons/cart.svg';
+import foody from '../assets/images/foody.png';
+import { useNavigate } from 'react-router-dom';
+import Button from './elements/Button';
+import { useState, useEffect } from 'react';
 
 const Header = ({ cartCount }) => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // LOG OUT
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('Auth Token');
+    sessionStorage.removeItem('User Id');
+    navigate('/');
+  };
+
+  // we want to use UseEffect in this case  becuase we wanto to listen to our SESSIONSTORTAGE TO KNOW IF THE USER IS STILL THERE when
+  // ... they were logging in or registering
+
+  useEffect(() => {
+    const checkAuthToken = () => {
+      const token = sessionStorage.getItem('Auth token');
+      if (token) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+
+    // we add and event listener that is gonna listen to the storage and also FIRE this function
+    //... if anything changes
+
+    window.addEventListener('storage', checkAuthToken);
+
+    // we also want to remove the event listener when the component is unmounted
+
+    return () => {
+      window.removeEventListener('storage', checkAuthToken);
+    };
+  }, []);
+
   return (
     <nav id="header" className="bg-black text-white">
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -38,8 +77,25 @@ const Header = ({ cartCount }) => {
               </div>
             ) : null}
           </Link>
-          <Link to="/login">Log In</Link>
-          <Link to="/register">Sign Up</Link>
+          {
+            // if the user is logged in we want to show the logout button
+
+            isLoggedIn ? (
+              <Button
+                onClick={handleLogout}
+                className="bg-yellow-400 text-black"
+              >
+                Logout
+              </Button>
+            ) : (
+              /* if the user is not logged in we want to show the login and register buttons */
+
+              <>
+                <Link to="/login">Log In</Link>
+                <Link to="/register">Sign Up</Link>
+              </>
+            )
+          }
         </div>
       </div>
     </nav>

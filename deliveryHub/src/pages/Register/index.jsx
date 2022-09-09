@@ -38,7 +38,7 @@ const Register = () => {
         }
       });
 
-    // FETCH USER
+    // FETCH USER BUT ON MONGODB
     fetch('http://localhost:8080/api/create-user', {
       method: 'POST',
       headers: {

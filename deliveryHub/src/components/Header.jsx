@@ -13,8 +13,9 @@ const Header = ({ cartCount }) => {
   // LOG OUT
 
   const handleLogout = () => {
-    sessionStorage.removeItem('Auth Token');
+    sessionStorage.removeItem('Auth token');
     sessionStorage.removeItem('User Id');
+    window.dispatchEvent(new Event('storage'));
     navigate('/');
   };
 
@@ -77,25 +78,14 @@ const Header = ({ cartCount }) => {
               </div>
             ) : null}
           </Link>
-          {
-            // if the user is logged in we want to show the logout button
-
-            isLoggedIn ? (
-              <Button
-                onClick={handleLogout}
-                className="bg-yellow-400 text-black"
-              >
-                Logout
-              </Button>
-            ) : (
-              /* if the user is not logged in we want to show the login and register buttons */
-
-              <>
-                <Link to="/login">Log In</Link>
-                <Link to="/register">Sign Up</Link>
-              </>
-            )
-          }
+          {isLoggedIn ? (
+            <Button onClick={handleLogout}>Log Out</Button>
+          ) : (
+            <>
+              <Link to="/login">Log In</Link>
+              <Link to="/register">Sign Up</Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

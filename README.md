@@ -1,5 +1,11 @@
 # Food Ordering App Built Using MERN Stack!
 
+ <p align="center">
+    <img src="https://user-images.githubusercontent.com/88522494/189428269-73a5b54e-4c83-47a6-bcb0-c7d4c354feb0.jpg" alt="alternate text">
+ </p>
+
+
+
 ![180350693-92a71ecb-7672-49b1-8943-188e96d13ee6](https://user-images.githubusercontent.com/88522494/189427906-faa903f4-6c18-47b0-a55d-9845e50b9002.png)
 
 ## Available Scripts
